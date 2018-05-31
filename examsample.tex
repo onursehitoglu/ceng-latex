@@ -1,0 +1,128 @@
+%pdflatex -jobname=examsample-key '\def\KEY{}\input{examsample}'
+\documentclass[10pt,a4paper]{article}
+\usepackage{cengexam}
+
+\usepackage{listings}
+\usepackage{amssymb}
+
+
+%%%%%%%%%%%% Exam Properties   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\CourseName}{CEng XYZ - Introduction to Exam Templates}
+\newcommand{\Exam}{Spring 2017-2018, Midterm I, May 10, 2018}
+\newcommand{\Duration}{100 minutes}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+\pagestyle{fancy}
+\rfoot{\thepage}
+\cfoot{}
+
+\preamble{4}        % number of questions for gradebox
+
+%%%%%%%%%%%%%%%%% START HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstset{language=C,
+        basicstyle=\small\ttfamily, keywordstyle=\bfseries,
+        identifierstyle=\sffamily, stringstyle=\itshape,
+    commentstyle=\itshape, showstringspaces=true,escapeinside=`'}
+\question{25}
+
+\questsection
+ Fusce pharetra, mauris consequat sagittis volutpat, augue ante semper dolor, sit amet aliquet urna nisi egestas risus. Mauris efficitur neque id augue ultrices sagittis. Pellentesque ac cursus libero. Fusce sit amet nibh ut mauris interdum ornare. Aenean massa ante, varius et eros et, tempus euismod tortor. Nunc turpis nunc, consequat sed nulla sit amet, eleifend egestas leo. Curabitur augue nisi, tristique eu blandit vel, facilisis id massa. Donec orci lacus, bibendum eu risus vitae, sollicitudin aliquam ex. Cras porta neque eget massa vehicula laoreet. Vestibulum ornare cursus nisi quis dignissim. Ut leo dolor, dignissim sit amet nisi eu, condimentum tincidunt lectus. Nulla facilisi.\\
+
+\answerfixed{35em}{10em}{What?}
+
+\questsection
+Donec volutpat leo id est imperdiet pharetra. Mauris interdum sapien a lectus aliquet, at blandit justo pretium. Sed pellentesque leo vitae mauris sagittis consectetur. Phasellus malesuada, nisi sed elementum consectetur, erat lorem sagittis est, non interdum ligula lectus eu lectus. Morbi fringilla sapien arcu, et dictum ex mattis sed. Suspendisse nec lacus id tortor porta sollicitudin. Suspendisse nec enim urna. Ut semper tortor et mi pellentesque, at finibus ex dapibus. Sed quis massa vestibulum, egestas ipsum ac, dapibus diam. Aenean sed lectus a nisl tempus laoreet. \\
+
+\answerfixedbox{35em}{10em}{ Donec volutpat leo id est imperdiet pharetra. Mauris interdum sapien a lectus aliquet, at blandit justo pretium. Sed pellentesque leo vitae mauris sagittis consectetur. Phasellus malesuada, nisi sed elementum consectetur, erat lorem sagittis est, non interdum ligula lectus eu lectus. Morbi fringilla sapien arcu, et dictum ex mattis sed. Suspendisse nec lacus id tortor porta sollicitudin. Suspendisse nec enim urna. Ut semper tortor et mi pellentesque, at finibus ex dapibus. Sed quis massa vestibulum, egestas ipsum ac, dapibus diam. Aenean sed lectus a nisl tempus laoreet. 
+}
+
+\newpage
+\lfoot{\textbf{Name:} \underline{\hspace*{15em}} \hspace*{3em} \textbf{Id:} \underline{\hspace*{8em}}}
+\question{25}
+
+\questsection (10pts)
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed maximus sapien felis, efficitur volutpat risus tristique condimentum. Curabitur maximus cursus neque, eu ultrices augue sodales pharetra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas ac semper risus. Nulla tristique, arcu quis vehicula commodo, enim enim venenatis metus, a molestie lorem felis vel erat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum, quam nec rutrum eleifend, nisi tellus accumsan ipsum, id faucibus ex turpis eget tellus. Aliquam in vulputate risus. Phasellus et risus sed lorem mattis luctus a id orci. Integer ac placerat elit. Fusce posuere hendrerit pulvinar.\\[.5em]
+
+\answerbox{I don't know}\\
+
+\questsection (15pts)
+Cras neque nisi, sodales ac turpis vitae, imperdiet viverra augue. Sed consequat ligula laoreet sem maximus convallis. Praesent efficitur ut urna auctor commodo. Nullam fringilla ex non urna luctus luctus. Cras augue lectus, rutrum sit amet fermentum ut, consectetur id urna. Donec feugiat massa in semper venenatis. Curabitur bibendum lacus quis sollicitudin convallis. Sed in ornare magna.\\
+
+\answer{ 
+Proin dapibus suscipit eros ut ullamcorper. Morbi sed dictum sapien. Nunc vitae volutpat erat. Etiam tristique sem ligula, non pharetra nibh pretium in. Nulla blandit lectus ac enim tempor placerat. Donec porta odio eu venenatis varius. Praesent urna sapien, ultrices vitae porttitor a, semper eget dui. Nulla sodales eget massa nec molestie. Mauris scelerisque euismod turpis.
+}
+
+
+\newpage
+\question{25}
+\questsection  Which of the following make sense?
+\begin{itemize}
+\item Etiam vel urna quam.  \checked
+\item Quisque lacinia ultricies consectetur. \unchecked
+\item Donec malesuada eget urna sed blandit. \unchecked
+\end{itemize}
+
+\questsection Donec sagittis sed nulla et interdum. \answerbox{Cras varius ex sit amet}\\
+
+\questsection libero hendrerit, \answeruline{lacinia tincidunt dolor sodales}. Quisque ut ipsum consectetur arcu rhoncus suscipit non gravida est.\\
+
+\questsection Ut id porttitor purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. \truefalse\\
+
+\questsection Ut id porttitor purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. \falsetrue\\
+
+\questsection Ut id porttitor purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. \truefalse\\
+
+\questsection Ut id porttitor purus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. \falsetrue\\
+
+\questsection
+Fill in the following assuming this and that:\\[1em]
+\begin{answerminip}{9em}{.45\linewidth}
+Nam tincidunt augue vitae tempor pulvinar. In commodo ante molestie, auctor lectus quis, mattis justo. Nulla quis erat consectetur, ornare felis eget, ullamcorper odio.
+\end{answerminip}
+\hspace*{1em}
+\begin{answerminip}{9em}{.45\linewidth}
+Morbi dui velit, consectetur in ex non, consequat dictum nibh. Fusce fermentum, massa eu accumsan sagittis, massa urna facilisis neque, in vehicula dui neque eget purus. Quisque sed sapien non neque vehicula tristique mollis non sapien. Cras elementum eros eu lorem tempor mollis. 
+\end{answerminip}
+
+\newpage
+\question{25}
+Mauris tortor nulla, commodo id eleifend eu, hendrerit congue elit. Sed quis tortor efficitur, cursus elit nec, bibendum risus. Mauris mollis lorem eget mi tristique, et euismod risus placerat. Ut eleifend pharetra pellentesque. Quisque iaculis et velit sit amet consequat. Quisque vestibulum purus nec ullamcorper auctor. Suspendisse potenti. Donec condimentum urna convallis venenatis volutpat. Nunc ullamcorper interdum tortor, eu ullamcorper lorem egestas eget. Mauris quis pharetra nisl. Proin aliquet diam in erat gravida, et porta nulla laoreet. Donec ac purus tristique, lacinia ante non, pulvinar est. 
+
+\begin{lstlisting}
+int shellSort(int arr[], int n)
+{
+    // Start with a big gap, then reduce the gap
+    for (int gap = n/2; gap > 0; gap /= 2)
+    {
+        // Do a gapped insertion sort for this gap size.
+        // The first gap elements a[0..gap-1] are already in gapped order
+        // keep adding one more element until the entire array is
+        // gap sorted 
+        for (int i = `\answer{gap}' ; `\answer{i < n}' ; `\answer{i += 1}')
+        {
+            // add a[i] to the elements that have been gap sorted
+            // save a[i] in temp and make a hole at position i
+            `\answer{int temp = arr[i];}'
+ 
+            // shift earlier gap-sorted elements up until the correct 
+            // location for a[i] is found
+            int j;            
+            `\answer{for (j = i; j >= gap \&\& arr[j - gap] > temp; j -= gap)}'
+                `\answer{arr[j] = arr[j - gap];}'
+             
+            //  put temp (the original a[i]) in its correct location
+            arr[j] = temp;
+        }
+    }
+    return 0;
+}
+\end{lstlisting}
+
+
+%%%%%%%%%% ENDS HERE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\closing
+\end{document}
+

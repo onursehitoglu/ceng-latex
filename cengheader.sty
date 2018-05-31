@@ -1,0 +1,30 @@
+\ProvidesPackage{cengheader}
+\RequirePackage{fancyhdr}
+\RequirePackage{tikz}
+
+\definecolor{metulogo}{RGB}{227,24,55}
+\definecolor{metugray}{rgb}{0.44140625, 0.4375, 0.44921875}
+\newcommand*{\metutitle}{\usefont{T1}{bourgs}{bx}{n}}
+
+\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrule}{\color{metulogo}
+\colorlet{headerbgcolor}{metulogo}
+\colorlet{headertxtcolor}{white}
+
+\rhead{}
+\chead{}
+\lhead{\begin{tikzpicture}[remember picture,overlay]
+     \draw[fill=headerbgcolor] ([yshift=-5mm] current page.north west) 
+	 node (tl) {}
+	 rectangle ([yshift=-2.5cm] current page.north east) 
+	 node (tr) {};
+   \node[anchor=north west, xshift=1cm, yshift=-5mm] (mlog) at (tl.west) 
+		{\includegraphics[height=1cm]{metu-official-logo}};
+    \node[anchor=north east,xshift=5mm,rectangle,inner sep=11pt] 
+	[right of=mlog] {\color{headertxtcolor}\metutitle\Large METU};
+%	\node[anchor=south east,xshift=-1cm] (cengl) at (tr.north east) {\includegraphics[height=1.2cm]{ceng}};
+%	\node[anchor=east,rectangle,xshift=-4.5cm,inner sep=11pt]  [left of=cengl]
+	\node[anchor=north east,rectangle,yshift=15mm,xshift=-5mm,rectangle, inner sep=11pt] at (tr.east) 
+              {\color{headertxtcolor}\metutitle\Large Department of Computer Engineering};
+\end{tikzpicture}}
+

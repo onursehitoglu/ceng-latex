@@ -1,0 +1,201 @@
+\ProvidesPackage{cengexam}
+\RequirePackage{fancyhdr}
+\RequirePackage{tikz}
+\usetikzlibrary{positioning}
+
+\definecolor{metulogo}{RGB}{227,24,55}
+\definecolor{metugray}{rgb}{0.44140625, 0.4375, 0.44921875}
+%\newcommand*{\metutitle}{\usefont{T1}{bourgs}{bx}{n}}
+\newcommand*{\metutitle}{\Large\bf}
+
+%% define metu logo
+\tikzset{pics/metulogo/.style args={#1}{code={
+\path (#1,#1) node (cA) {};
+\path (1.3819660112501051*#1,#1) node (cB) {}; 
+\path [line width=#1/40,draw=white,fill=white] (cA) circle [radius=#1*1.025];
+\path [line width=#1/40,draw=white,fill=white] (cB) circle [radius=#1*1.025];
+\path [line width=#1/40,draw,fill] (cA) circle [radius=#1];
+\path [line width=#1/40,draw,fill=white] (cB) circle [radius=#1];
+\draw [fill] (#1*1.19098300562505238,0.01840665672467956*#1) arc [radius=#1,start angle=-78.9898431656865, end angle=78.9898431656865];
+\draw [fill=white] (#1*1.19098300562505238,1.9815933432753204*#1) arc [radius=#1,start angle=180-78.9898431656865, end angle=180+78.9898431656865];
+}}}
+
+
+\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\footrule}{\color{metulogo}
+
+\rhead{}
+\chead{}
+\lhead{\begin{tikzpicture}[remember picture,overlay]
+     \draw[fill=headerbgcolor] ([yshift=-5mm] current page.north west) 
+	 node (tl) {}
+	 rectangle ([yshift=-2.5cm] current page.north east) 
+	 node (tr) {};
+   %\node[anchor=north west, xshift=1cm, yshift=-5mm] (mlog) at (tl.west) 
+    % {\includegraphics[height=1cm]{metu-official-logo}};
+    \pic [xshift=1cm, yshift=-17mm] (mlog) at (tl.west) {metulogo={7mm}};
+    \node[anchor=north east,xshift=5mm,rectangle,inner sep=11pt] 
+	[right=of mlogcA] {\color{headertxtcolor}\metutitle\Large METU};
+%	\node[anchor=south east,xshift=-1cm] (cengl) at (tr.north east) {\includegraphics[height=1.2cm]{ceng}};
+%	\node[anchor=east,rectangle,xshift=-4.5cm,inner sep=11pt]  [left of=cengl]
+	\node[anchor=north east,rectangle,yshift=15mm,xshift=-5mm,rectangle, inner sep=11pt] at (tr.east) 
+              {\color{headertxtcolor}\metutitle\Large Department of Computer Engineering};
+\end{tikzpicture}}
+
+\usepackage{array}
+\usepackage{amssymb}
+\addtolength{\evensidemargin}{-2cm}
+\addtolength{\oddsidemargin}{-2cm}
+\addtolength{\textwidth}{4cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\textheight}{3cm}
+
+\colorlet{headerbgcolor}{white!90!black}
+\colorlet{headertxtcolor}{black}
+
+%\colorlet{headerbgcolor}{metulogo}
+%\colorlet{headertxtcolor}{white}
+
+\usepackage{comment}
+\usepackage{etoolbox}
+
+\makeatletter
+\def\Hline#1{\noalign{\ifnum0=`}\fi\hrule \@height #1 \futurelet \@tempa\@xhline}
+\def\Cline#1#2{%
+  \omit
+  \@multicnt#1%
+  \advance\@multispan\m@ne
+  \ifnum\@multicnt=\@ne\@firstofone{&\omit}\fi
+  \@multicnt#1%
+  \advance\@multicnt-#1%
+  \advance\@multispan\@ne
+  \leaders\hrule\@height #2\hfill
+  \cr
+  \noalign{\vskip-#2}}
+\makeatother
+\newcommand{\HRule}{\rule{\linewidth}{1pt}}
+\newcolumntype{+}{<{ }@{\vrule width 1pt}>{ }}
+%\newcolumntype{^}{@{\vrule width 1.5pt}}
+%\newcolumntype{*}{@{\hspace{5pt}}}
+%\newcolumntype{P}[1]{>{\bf}p{#1}}
+%\newcolumntype{R}[1]{>{\hfill}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+
+\newcounter{questcount}
+\newcounter{pointscount}
+\newcounter{questsectioncount}[questcount]
+\def\circtxt#1{$_{\mathalpha \bigcirc \mkern-13mu \mathtt #1 \mkern5mu}$}
+\makeatletter
+\newcommand{\question}[1]{\stepcounter{questcount}\def\@currentlabel{\arabic{questcount}}%
+\addtocounter{pointscount}{#1}%
+\noindent {\large\bf QUESTION \thequestcount .}(#1 points) \\[1em] \noindent}
+
+\makeatother
+
+\newcommand{\questsection}{\stepcounter{questsectioncount}
+\noindent {\large\bf \alph{questsectioncount})} }
+
+\newcommand{\qbox}[2]{\fbox{\rule{0pt}{#1} \hspace*{#2}}}
+
+
+%\def\KEY{}
+
+\ifdef{\KEY}
+{
+% Key mode
+\newcommand{\answerbox}[1]{\framebox{\large\textsf{\textcolor{blue}{#1}}\ }}
+\newcommand{\answeruline}[1]{\underline{\large\textsf{\textcolor{blue}{#1}}\ }}
+\newcommand{\answer}[1]{\textcolor{blue}{#1}}
+\newcommand{\answerfixed}[3]{\begin{minipage}[t][#2]{#1} \color{blue} #3 \end{minipage}}
+\newcommand{\answerfixedbox}[3]{\framebox{\begin{minipage}[t][#2]{#1} \color{blue} #3 \end{minipage}}}
+\newcommand{\checked}{{\Large $\square \mkern-12mu \scriptstyle \textcolor{blue}{\checkmark} \mkern+5mu  $}}
+\newcommand{\unchecked}{{\Large $\square $}\ }
+\newcommand{\both}{{\Large $\square$} $\mkern-30mu \textcolor{blue}{\scriptstyle both} \mkern+5mu  $}
+\renewenvironment{comment}{\color{blue}}{}
+\newsavebox{\lastanswer}
+\newcommand{\truefalse}{\framebox{T} or F}
+\newcommand{\falsetrue}{T or \framebox{F}}
+\newenvironment{answerminip}[2]{\begin{lrbox}{\lastanswer}\color{blue}\begin{minipage}[t][#1][t]{#2}}{\end{minipage}\end{lrbox}\fbox{\usebox{\lastanswer}}}
+}
+{
+% Exam mode
+\newcommand{\answerbox}[1]{\framebox{\large \phantom{#1}\ }}
+\newcommand{\answeruline}[1]{\underline{\large \phantom{#1}\ }}
+\newcommand{\answer}[1]{\phantom{#1}}
+\newcommand{\answerfixed}[3]{\begin{minipage}[t][#2]{#1} \  \end{minipage}}
+\newcommand{\answerfixedbox}[3]{\framebox{\begin{minipage}[t][#2]{#1} \  \end{minipage}}}
+\newcommand{\checked}{{\Large $\square$\ }}
+\newcommand{\unchecked}{{\Large $\square$\ }}
+\newcommand{\both}{{\Large $\square$\ }}
+\newsavebox{\lastanswer}
+\newcommand{\truefalse}{T or F}
+\newcommand{\falsetrue}{T or F}
+\newenvironment{answerminip}[2]{\fbox{\begin{minipage}[t][#1][t]{#2}\ \end{minipage}}\begin{lrbox}{\lastanswer}}{\end{lrbox}}
+}
+
+\newcommand{\forloop}[5][1]%
+{%
+\setcounter{#2}{#3}%
+\ifnumcomp{\value{#2}}{<}{#4}%
+{%
+#5%
+\addtocounter{#2}{#1}%
+\forloop[#1]{#2}{\value{#2}}{#4}{#5}%
+}%
+{%
+}%
+}%
+
+
+\newcommand{\gradebox}[1]{\newcounter{bgcounter}%
+\begin{tabular}{|*{#1}{c|}c|} \hline
+\forloop{bgcounter}{1}{#1 + 1}{\textbf{Q\arabic{bgcounter}} &} 
+		\textbf{Tot}\\ \hline
+\forloop{bgcounter}{1}{#1 + 1}{ &} \rule{0pt}{2em} \\ \hline
+\end{tabular}
+}
+
+
+\newcommand{\preamble}[1]{
+%%%%% GRADEBOX %%%%%%%%%%%%%%%
+\begin{flushright}
+\gradebox{#1}
+\end{flushright}
+%%%%% GRADEBOX %%%%%%%%%%%%%%%
+
+\begin{center} {\Large\bf
+\CourseName \\}
+\Exam (\pageref{thelastpage} pages,
+\ref{thelastpage} questions,
+\ref{thelastpointcount} points, \Duration)
+\end{center}
+
+\noindent
+{\scriptsize
+\textbf{\large METU Honor Code and Pledge}\\
+
+\noindent\textbf{METU Honor Code:} The members of the METU community are reliable,
+responsible and Honorable people who embrace only the success and recognition they
+ deserve, and act with integrity in their use, evaluation and presentation of facts
+, data and documents. \\
+
+\noindent\textit{I have read and understood the implications of the METU Honor Code. To be precise, I understand that this is a \textbf{closed} notes exam, and I am forbidden to access any other source of information other than provided within the exam. I will TURN OFF all my electronic equipment (phones, smart watches, etc.) and put it off the table along with other notes and materials that I may have with me. I understand that leaving electronic devices on during the exam is strictly forbidden. I understand and accept to obey all the rules announced by the course staff, and that failure to obey these will result in disciplinary action.}\\
+}
+
+\noindent
+\textbf{Name:}
+\underline{\hspace*{15em}}\hfill
+\textbf{No:}
+\underline{\hspace*{5em}}\hfill
+\textbf{Signature:}
+\underline{\hspace*{5em}}\\
+}
+
+\newcommand{\closing}{
+\label{thelastpage}
+\makeatletter
+\def\@currentlabel{\arabic{pointscount}}
+\makeatother
+\label{thelastpointcount}
+}
