@@ -5,8 +5,8 @@
 
 \definecolor{metulogo}{RGB}{227,24,55}
 \definecolor{metugray}{rgb}{0.44140625, 0.4375, 0.44921875}
-%\newcommand*{\metutitle}{\usefont{T1}{bourgs}{bx}{n}}
-\newcommand*{\metutitle}{\Large\bf}
+\newcommand*{\metutitle}{\usefont{T1}{bourgs}{bx}{n}}
+%\newcommand*{\metutitle}{\Large\bf}
 
 %% define metu logo
 \tikzset{pics/metulogo/.style args={#1}{code={
@@ -98,6 +98,24 @@
 
 \newcommand{\qbox}[2]{\fbox{\rule{0pt}{#1} \hspace*{#2}}}
 
+\newcounter{numquestions}
+\newcounter{sumpoints}
+\makeatletter
+\AtEndDocument{\def\sp{ }%
+    \immediate\write\@auxout{\string\expandafter\string\ifx%
+    \string\csname\sp c@numquestions\string\endcsname\string\relax%
+    \string\newcounter{numquestions}%
+    \string\fi%
+    \string\setcounter{numquestions}{\number\value{questcount}}}%
+    \immediate\write\@auxout{\string\expandafter\string\ifx%
+    \string\csname\sp c@sumpoints\string\endcsname\string\relax%
+    \string\newcounter{sumpoints}%
+    \string\fi%
+    \string\setcounter{sumpoints}{\number\value{pointscount}}}%
+    \label{lastpage}
+}
+\makeatother
+
 
 %\def\KEY{}
 
@@ -157,18 +175,18 @@
 }
 
 
-\newcommand{\preamble}[1]{
+\newcommand{\preamble}{
 %%%%% GRADEBOX %%%%%%%%%%%%%%%
 \begin{flushright}
-\gradebox{#1}
+\gradebox{\value{numquestions}}
 \end{flushright}
 %%%%% GRADEBOX %%%%%%%%%%%%%%%
 
 \begin{center} {\Large\bf
 \CourseName \\}
-\Exam (\pageref{thelastpage} pages,
-\ref{thelastpage} questions,
-\ref{thelastpointcount} points, \Duration)
+\Exam\\(\pageref{lastpage} pages,
+\arabic{numquestions} questions,
+\arabic{sumpoints} points, \Duration)
 \end{center}
 
 \noindent
@@ -192,10 +210,10 @@ responsible and Honorable people who embrace only the success and recognition th
 \underline{\hspace*{5em}}\\
 }
 
-\newcommand{\closing}{
-\label{thelastpage}
-\makeatletter
-\def\@currentlabel{\arabic{pointscount}}
-\makeatother
-\label{thelastpointcount}
-}
+%\newcommand{\closing}{
+%\label{thelastpage}
+%\makeatletter
+%\def\@currentlabel{\arabic{pointscount}}
+%\makeatother
+%\label{thelastpointcount}
+%}
